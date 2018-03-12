@@ -1,0 +1,9 @@
+NAME=basilisk-ii
+VERSION=GIT_MASTER
+REVISION=1
+LICENSE=GPL-2.0-or-later
+SRC=https://github.com/cebix/macemu.git
+REF=refs/heads/master
+BUILDDEPS=sdl
+INSTALLDEPS=sdl
+PURGE=yes
