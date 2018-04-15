@@ -1,6 +1,6 @@
 #!/bin/bash
 # Allow use of software SDL video surfaces
-patch -Np1 -i "${SHED_PATCHDIR}/allow_sw_sdl_surface.patch"
+patch -Np1 -i "${SHED_PKG_PATCH_DIR}/allow_sw_sdl_surface.patch"
 cd BasiliskII/src/Unix
 # Forcibly replace ancient automake files
 rm config.guess config.sub
@@ -16,5 +16,5 @@ autoreconf -fiv -I m4 &&
             --without-esd \
             --without-gtk \
             --without-x &&
-make -j $SHED_NUMJOBS &&
-make DESTDIR="$SHED_FAKEROOT" install
+make -j $SHED_NUM_JOBS &&
+make DESTDIR="$SHED_FAKE_ROOT" install
