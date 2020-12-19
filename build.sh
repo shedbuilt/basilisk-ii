@@ -1,15 +1,17 @@
 #!/bin/bash
 # Allow use of software SDL video surfaces
-## patch -Np1 -i "${SHED_PKG_PATCH_DIR}/allow_sw_sdl_surface.patch"
+# patch -Np1 -i "${SHED_PKG_PATCH_DIR}/allow_sw_sdl_surface.patch"
 cd BasiliskII/src/Unix &&
 # Forcibly replace ancient automake files
-rm config.guess config.sub &&
-automake -a &&
-autoreconf -fiv -I m4 &&
+rm -v config.guess config.sub || exit 1
+# automake will fail due to missing Makefile.am, but will link to new config.guess and config.sub
+automake --add-missing --copy
+# Generate remaining required automake files
+NO_CONFIGURE=1 ./autogen.sh &&
 ./configure --prefix=/usr/local \
             --enable-sdl-video \
             --enable-sdl-audio \
-            --with-sdl2 \
+            --with-bincue \
             --enable-addressing=banks \
             --disable-vosf \
             --disable-jit-compiler \

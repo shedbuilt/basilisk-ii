@@ -1,9 +1,9 @@
 NAME=basilisk-ii
-VERSION=d684527
+VERSION=a306262
 REVISION=2
 LICENSE=GPL-2.0-or-later
-SRC=https://github.com/cebix/macemu.git
-COMMIT=d684527b27ecca9b76a7895abd25b1eba5317a1c
+SRC=https://github.com/emaculation/macemu
+COMMIT=a306262e10abb1c20f12c742dae2fb67509f0150
 BUILDDEPS=sdl2
 INSTALLDEPS=sdl2
 PURGE=yes
