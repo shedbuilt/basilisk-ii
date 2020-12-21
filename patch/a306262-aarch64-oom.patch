@@ -1,16 +1,14 @@
---- a/BasiliskII/src/CrossPlatform/vm_alloc.cpp	2020-12-20 14:02:01.631181158 -1000
-+++ b/BasiliskII/src/CrossPlatform/vm_alloc.cpp	2020-12-20 14:04:14.282669581 -1000
-@@ -254,10 +254,12 @@
-
+--- a/BasiliskII/src/CrossPlatform/vm_alloc.cpp	2020-12-20 19:21:13.242690695 -0500
++++ b/BasiliskII/src/CrossPlatform/vm_alloc.cpp	2020-12-20 19:22:52.994577378 -0500
+@@ -255,9 +255,11 @@
  	if ((addr = mmap((caddr_t)next_address, size, VM_PAGE_DEFAULT, the_map_flags, fd, 0)) == (void *)MAP_FAILED)
  		return VM_MAP_FAILED;
--
-+
-+#if REAL_ADDRESSING || DIRECT_ADDRESSING
+ 	
++#if REAL_ADDRESSING || DIRECT_ADDRESSING	
  	// Sanity checks for 64-bit platforms
  	if (sizeof(void *) == 8 && (options & VM_MAP_32BIT) && !((char *)addr <= (char *)0xffffffff))
  		return VM_MAP_FAILED;
 +#endif
-
+ 
  	next_address = (char *)addr + size;
  #elif defined(HAVE_WIN32_VM)
