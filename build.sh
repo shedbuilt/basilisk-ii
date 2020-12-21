@@ -1,11 +1,10 @@
 #!/bin/bash
-# Allow use of software SDL video surfaces
-# patch -Np1 -i "${SHED_PKG_PATCH_DIR}/allow_sw_sdl_surface.patch"
-cd BasiliskII/src/Unix &&
+# Fix OOM crash on AArch64
+patch -Np1 -i "${SHED_PKG_PATCH_DIR}/a306262-aarch64-oom.patch" &&
 # Forcibly replace ancient automake files
-rm -v config.guess config.sub || exit 1
-# automake will fail due to missing Makefile.am, but will link to new config.guess and config.sub
-automake --add-missing --copy
+cd BasiliskII/src/Unix &&
+# automake will fail due to missing Makefile.am, but will create new config.guess and config.sub files
+automake --add-missing --force-missing --copy
 # Generate remaining required automake files
 NO_CONFIGURE=1 ./autogen.sh &&
 ./configure --prefix=/usr/local \
